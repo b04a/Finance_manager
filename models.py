@@ -33,3 +33,33 @@ def get_transactions():
     cursor.execute('SELECT * FROM transactions ORDER BY amount DESC')
     transactions = cursor.fetchall()
     return transactions
+
+
+def calculate_balance():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('SELECT type, amount FROM transactions')
+    transactions = cursor.fetchall()
+
+    income = sum(amount for t_type, amount in transactions if t_type == 'income')
+    expense = sum(amount for t_type, amount in transactions if t_type == 'expense')
+
+    balance = income - expense
+
+    return balance
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
