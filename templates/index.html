@@ -19,4 +19,24 @@
 
         <button type="submit">Add Transaction</button>
     </form>
+
+    <h2>Transaction History</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Type</th>
+            <th>Category</th>
+            <th>Date</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction[0] }}</td>
+            <td>{{ transaction[1] }}</td>
+            <td>{{ transaction[2] }}</td>
+            <td>{{ transaction[3] }}</td>
+            <td>{{ transaction[4] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 </body>
