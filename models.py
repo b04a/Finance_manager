@@ -26,3 +26,10 @@ def add_transaction(amount, type, category, date):
     ''', (amount, type, category, date))
     conn.commit()
     conn.close()
+
+def get_transactions():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM transactions ORDER BY amount DESC')
+    transactions = cursor.fetchall()
+    return transactions
