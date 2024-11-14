@@ -67,6 +67,15 @@ def update_transaction(transaction_id, amount, type, category, date):
     conn.commit()
     conn.close()
 
+def get_category_stats():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('SELECT category, SUM(amount) FROM transactions WHERE type = "expense" GROUP BY category')
+    stats = cursor.fetchall()
+    conn.close()
+    return stats
+
+
 
 
 
