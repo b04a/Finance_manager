@@ -49,6 +49,25 @@ def calculate_balance():
     return balance
 
 
+def delete_transaction(transaction_id):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM transactions WHERE id = ?', (transaction_id,))
+    conn.commit()
+    conn.close()
+
+def update_transaction(transaction_id, amount, type, category, date):
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('''
+        UPDATE transactions
+        SET amount = ?, type = ?, category = ?, date = ?
+        WHERE id = ?
+    ''', (amount, type, category, date, transaction_id))
+    conn.commit()
+    conn.close()
+
+
 
 
 
